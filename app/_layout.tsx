@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -30,12 +31,20 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }}/>
-          <Stack.Screen name="login" options={{ headerShown: false }}/>
-          <Stack.Screen name="register" options={{ headerShown: false }}/>
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <SafeAreaProvider>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }}/>
+            <Stack.Screen name="onBoarding" options={{ headerShown: false }}/>
+            <Stack.Screen name="login" options={{ headerShown: false }}/>
+            <Stack.Screen name="forgotPassword" options={{ headerShown: false }}/>
+            <Stack.Screen name="loginWithEmail" options={{ headerShown: false }}/>
+            <Stack.Screen name="register" options={{ headerShown: false }}/>
+            <Stack.Screen name="OTP" options={{ headerShown: false }}/>
+            <Stack.Screen name="otherInfos" options={{ headerShown: false }}/>
+            <Stack.Screen name="congrates" options={{ headerShown: false }}/>
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </SafeAreaProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

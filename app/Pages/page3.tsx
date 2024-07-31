@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 
-const Page2 = () => {
+const Page3 = () => {
   // Get the screen width
   const screenWidth = Dimensions.get('window').width;
 
@@ -14,11 +14,13 @@ const Page2 = () => {
 
   const titleOpacity = useSharedValue(0);
   const subTitleOpacity = useSharedValue(0);
+  const smallNote = useSharedValue(0);
   const buttonTranslateY = useSharedValue(50);
 
   useEffect(() => {
-    titleOpacity.value = withTiming(1, { duration: 1000, easing: Easing.out(Easing.exp) });
+    titleOpacity.value = withTiming(1, { duration: 500, easing: Easing.out(Easing.exp) });
     subTitleOpacity.value = withTiming(1, { duration: 1000, easing: Easing.out(Easing.exp) });
+    smallNote.value = withTiming(1, { duration: 1500, easing: Easing.out(Easing.exp) });
     buttonTranslateY.value = withTiming(0, { duration: 1000, easing: Easing.out(Easing.exp) });
   }, []);
 
@@ -34,6 +36,12 @@ const Page2 = () => {
     };
   });
 
+    const smallNoteAnimatedStyle = useAnimatedStyle(() => {
+        return {
+        opacity: smallNote.value,
+        };
+    });
+
   const buttonAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: buttonTranslateY.value }],
@@ -44,10 +52,13 @@ const Page2 = () => {
     <View style={styles.Container}>
       <View style={styles.TextsContainer}>
         <Animated.Text style={[styles.Title, titleAnimatedStyle]}>
-          Sachez où vous en êtes
+            Gérez vos reçu en déplacement
         </Animated.Text>
         <Animated.Text style={[styles.SubTitle, subTitleAnimatedStyle]}>
-          Consultez vos revenus et dèpenses en un clin d'œil.
+            Nous extrayons leurs infos et les enregistrons pour vous.
+        </Animated.Text>
+        <Animated.Text style={[smallNoteAnimatedStyle]}>
+            Disponible uniquement avec certains régimes
         </Animated.Text>
       </View>
       <View>
@@ -59,7 +70,7 @@ const Page2 = () => {
             height: animationSize,
             backgroundColor: '#fff',
           }}
-          source={require('../../assets/Lottie/anime2.json')}
+          source={require('../../assets/Lottie/anime3.json')}
         />
       </View>
       <Animated.View style={buttonAnimatedStyle}>
@@ -93,6 +104,10 @@ const styles = StyleSheet.create({
     fontSize: textSizes.large,
     color: Colors.light.textColorBlack,
   },
+  smallNote:{
+    fontSize: textSizes.medium,
+    color: Colors.light.textColorBlack
+  },
   Button: {
     backgroundColor: Colors.light.background,
     borderRadius: 10,
@@ -107,4 +122,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Page2;
+export default Page3;

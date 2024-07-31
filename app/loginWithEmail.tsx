@@ -1,25 +1,22 @@
 import LottieView from "lottie-react-native";
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, TextInput, LogBox } from "react-native";
+import { StyleSheet, Text, View, TextInput, LogBox } from "react-native";
 import Logo from "../assets/images/LOGO.svg"; // Import the SVG as a component
 import { Colors } from "@/constants/Colors";
+
 import { textSizes } from "@/constants/Sizes";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Link, router } from "expo-router";
-import PhoneNumberInput from "./Components/PhoneCodePicker";
-import { useNavigation } from "@react-navigation/native";
+import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const Login = () => {
-  const [countryCallingCode, setCountryCallingCode] = useState<string>("");
-  const [PhoneNumber, setPhoneNumber] = useState<string>("");
+const LoginWithEmail = () => {
+  const [EmailAddress, setEmailAddress] = useState<string>("");
   const [showPassword, setshowPassword] = useState<boolean>(false);
-  const navigation = useNavigation();
 
   const toggleShowPassword = () => {
     setshowPassword(!showPassword);
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.backgroundContainer}>
@@ -41,18 +38,13 @@ const Login = () => {
           </View>
           <View style={{ width: "100%", gap: 15 }}>
             <View style={styles.inputContainer}>
-
-              <PhoneNumberInput setCountryCallingCode={setCountryCallingCode} />
-
-              <Text style={{ fontSize: textSizes.large }}>
-                {countryCallingCode}
-              </Text>
               <TextInput
                 style={styles.TextInput}
-                placeholder="611 354 454"
-                keyboardType="numeric"
-                onChangeText={(text) => setPhoneNumber(text)}
-                value={PhoneNumber}
+                placeholder="example@example.com"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                onChangeText={(text) => setEmailAddress(text)}
+                value={EmailAddress}
                 maxLength={9}
               />
             </View>
@@ -84,19 +76,15 @@ const Login = () => {
 
             <View style={{ gap: 15 }}>
               <View style={styles.forgotPasswordContainer}>
-                <TouchableOpacity onPress={()=>navigation.navigate('forgotPassword')} style={styles.forgotPasswordButton}>
+                <TouchableOpacity style={styles.forgotPasswordButton}>
                   <Text style={styles.forgotPasswordText}>
                     Mot de passe oublié ?
                   </Text>
                 </TouchableOpacity>
               </View>
-              <Text style={{ fontSize: textSizes.medium, lineHeight: 25 }}>
-                Des frais standard d'appel, de messagerie texte et de données
-                peuvent s'appliquer.
-              </Text>
               <TouchableOpacity
                 onPress={() => {
-                  console.log("LOGIN");
+                  console.log("LOGINWEmail");
                 }}
                 style={styles.Button}
               >
@@ -110,7 +98,7 @@ const Login = () => {
 
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("loginWithEmail");
+                  console.log("LOGINWEmail");
                 }}
                 style={[
                   styles.Button,
@@ -124,12 +112,12 @@ const Login = () => {
                   },
                 ]}
               >
-                <MaterialCommunityIcons
-                  name="gmail"
+                <FontAwesome
+                  name="mobile-phone"
                   size={textSizes.large}
                   color={Colors.light.background}
                 />
-                <Text style={styles.Text}>avec e-mail</Text>
+                <Text style={styles.Text}>avec téléphone</Text>
               </TouchableOpacity>
               <View style={styles.line} />
               <View style={{height: 100, justifyContent: 'space-between', paddingVertical: 10}}>
@@ -266,4 +254,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default LoginWithEmail;

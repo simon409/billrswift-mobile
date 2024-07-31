@@ -1,38 +1,61 @@
-import { textSizes } from '@/constants/Sizes';
-import React, { useState } from 'react';
+import { Dimensions, AppState } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Logo from "../assets/images/LOGO.svg";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Header } from 'react-native/Libraries/NewAppScreen';
-import SliderIndicator from './Components/SliderIndicator';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import SwipingComponent from './Components/SwipingComponent';
+import LottieView from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import Page1 from './Pages/Page1';
-import Page2 from './Pages/Page2';
-import { Link, router } from 'expo-router';
-
-const pages = [
-    Page1,
-    Page2
-];
+const { width, height } = Dimensions.get('window');
 
 const Index = () => {
-    const [SliderIndex, setSliderIndex] = useState(0);
+    const navigation = useNavigation();
+    const [User, setUser] = useState(null);
+    const [appState, setAppState] = useState(AppState.currentState);
 
-    const OnDone = () => {
-        console.log('Done');
-        router.push('login');
-    }
+    useEffect(() => {
+        const appStateListener = AppState.addEventListener('change', (nextAppState) => {
+            if (appState.match(/inactive|background/) && nextAppState === 'active') {
+                // App has come to the foreground, check user state
+                if (User) {
+                    console.log("User exists, redirect to homepage");
+                    // navigation.navigate('HomePage'); // Uncomment and replace with actual homepage navigation
+                } else {
+                    navigation.navigate('onBoarding');
+                }
+            }
+            setAppState(nextAppState);
+        });
+
+        return () => {
+            appStateListener.remove(); // Cleanup the listener on component unmount
+        };
+    }, [User, navigation, appState]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (User) {
+                console.log("To be redirected to homepage");
+                // navigation.navigate('HomePage'); // Uncomment and replace with actual homepage navigation
+            } else {
+                navigation.navigate('onBoarding');
+            }
+        }, 3000); // 3 seconds delay
+
+        return () => clearTimeout(timer); // Cleanup the timer
+    }, [navigation, User]);
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.Header}>
-                <SliderIndicator index={SliderIndex} length={pages.length}/>
-                <Link href='/login' style={styles.skipButton}>
-                    <Text style={styles.text}>Skip</Text>
-                </Link>
+            <View style={styles.logoContainer}>
+                <Logo width={width * 0.6} />
             </View>
-            <SwipingComponent selectedIndex={SliderIndex} setSelectedIndex={setSliderIndex} pages={pages}/>
+            <LottieView
+                autoPlay
+                loop
+                style={styles.lottieAnim1}
+                source={require('../assets/Lottie/BGOrangeYellow.json')}
+            />
         </SafeAreaView>
     );
 }
@@ -40,22 +63,23 @@ const Index = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        paddingHorizontal: 46,
+        backgroundColor: '#E1E489',
+        paddingHorizontal: '10%',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    Header: {
-        paddingVertical: 20,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
     },
-    skipButton: {
-
+    lottieAnim1: {
+        width: '300%',
+        height: height,
+        position: 'absolute',
+        bottom: -width / 1.2,
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        zIndex: -1
     },
-    text: {
-        fontSize: textSizes.small,
-        color: 'black',
-    }
-})
+});
 
 export default Index;
