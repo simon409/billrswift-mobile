@@ -10,10 +10,14 @@ interface CustomTitleProps {
 }
 
 const CustomTitle = ({title, titleInBackground, centered} : CustomTitleProps) => {
+    const capitalizeFirstLetter = (text: string) => {
+        if (!text) return text;
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    };
     return (
         <View style={styles.textContainer}>
-            <Text style={[styles.TiteInBack, centered ? {textAlign: 'center'} : {textAlign: 'left'}]}>{titleInBackground}</Text>
-            <Text style={[styles.Title, centered ? {textAlign: 'center'} : {textAlign: 'left'}]}>{title}</Text>
+            <Text style={[styles.TiteInBack, centered ? {textAlign: 'center'} : {textAlign: 'left'}]}>{capitalizeFirstLetter(titleInBackground)}</Text>
+            <Text style={[styles.Title, centered ? {textAlign: 'center'} : {textAlign: 'left'}]}>{capitalizeFirstLetter(title)}</Text>
         </View>
     );
 }
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
         width: "100%",
         transform: [{ translateX: -50 }],
         zIndex: -1,
-        opacity: 0.1,
+        opacity: 0.1
       },
 })
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, ScrollView} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Logo from "../assets/images/LOGO.svg"; // Import the SVG as a component
+import {Logo} from "@/assets/images"; // Import the SVG as a component
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Colors } from '@/constants/Colors';
 import { textSizes } from '@/constants/Sizes';

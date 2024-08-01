@@ -1,7 +1,7 @@
 import { Dimensions, AppState } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Logo from "../assets/images/LOGO.svg";
+import {Logo} from "@/assets/images";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';

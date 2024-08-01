@@ -1,10 +1,20 @@
 import CustomTitle from '@/components/CustomTitle';
 import { textSizes } from '@/constants/Sizes';
+import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const Congrates = () => {
+    const navigation = useNavigation();
+    useEffect(() => {
+        const timer = setTimeout(() => {
+                navigation.navigate('home');
+        }, 1600); // 3 seconds delay
+
+        return () => clearTimeout(timer); // Cleanup the timer
+    }, []);
+
     return (
         <View style={styles.container}>
             {/* Congrates */}

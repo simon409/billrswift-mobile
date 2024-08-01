@@ -8,5 +8,6 @@ export type AuthStackParamList = {
     loginWithEmail: undefined;
     onBoarding: undefined;
     otherInfos: undefined;
+    home: undefined;
     // Add other screens and their params if any
   };

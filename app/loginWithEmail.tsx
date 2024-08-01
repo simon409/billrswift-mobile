@@ -1,7 +1,7 @@
 import LottieView from "lottie-react-native";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, LogBox } from "react-native";
-import Logo from "../assets/images/LOGO.svg"; // Import the SVG as a component
+import {Logo} from "@/assets/images"; // Import the SVG as a component
 import { Colors } from "@/constants/Colors";
 
 import { textSizes } from "@/constants/Sizes";

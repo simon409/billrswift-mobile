@@ -28,11 +28,13 @@ export default function RootLayout() {
     return null;
   }
 
+  //TODO: Change the initial route name
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider>
-          <Stack>
+          <Stack initialRouteName='home'>
             <Stack.Screen name="index" options={{ headerShown: false }}/>
             <Stack.Screen name="onBoarding" options={{ headerShown: false }}/>
             <Stack.Screen name="login" options={{ headerShown: false }}/>
@@ -42,6 +44,8 @@ export default function RootLayout() {
             <Stack.Screen name="OTP" options={{ headerShown: false }}/>
             <Stack.Screen name="otherInfos" options={{ headerShown: false }}/>
             <Stack.Screen name="congrates" options={{ headerShown: false }}/>
+
+            <Stack.Screen name="home" options={{headerShown: false}}/>
             <Stack.Screen name="+not-found" />
           </Stack>
         </SafeAreaProvider>
