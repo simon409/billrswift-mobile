@@ -1,6 +1,5 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -8,6 +7,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Stack } from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,24 +32,17 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider>
-          <Stack initialRouteName='home'>
-            <Stack.Screen name="index" options={{ headerShown: false }}/>
-            <Stack.Screen name="onBoarding" options={{ headerShown: false }}/>
-            <Stack.Screen name="login" options={{ headerShown: false }}/>
-            <Stack.Screen name="forgotPassword" options={{ headerShown: false }}/>
-            <Stack.Screen name="loginWithEmail" options={{ headerShown: false }}/>
-            <Stack.Screen name="register" options={{ headerShown: false }}/>
-            <Stack.Screen name="OTP" options={{ headerShown: false }}/>
-            <Stack.Screen name="otherInfos" options={{ headerShown: false }}/>
-            <Stack.Screen name="congrates" options={{ headerShown: false }}/>
-
-            <Stack.Screen name="home" options={{headerShown: false}}/>
+          <Stack screenOptions={{headerShown: false}} initialRouteName='(home)'>
+            <Stack.Screen name="(intro)"/>
+            <Stack.Screen name="(onBoarding)"/>
+            <Stack.Screen name="(login)"/>
+            <Stack.Screen name="(register)"/>
+            <Stack.Screen name="(home)"/>
+            <Stack.Screen name="(otp)"/>
             <Stack.Screen name="+not-found" />
           </Stack>
         </SafeAreaProvider>
-      </ThemeProvider>
     </GestureHandlerRootView>
   );
 }

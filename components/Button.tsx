@@ -1,11 +1,11 @@
 import { Colors } from '@/constants/Colors';
 import { textSizes } from '@/constants/Sizes';
-import { Link } from 'expo-router';
+import { Href, Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface ButtonProps {
-    href: string;
+    href: Href;
     text: string;
     style: "Filled" | "Outlined";
 }
