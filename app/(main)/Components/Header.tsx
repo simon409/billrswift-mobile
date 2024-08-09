@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         display: 'flex',
         flexDirection: 'row',
+
+        gap: 10,
     }
 });
 

@@ -1,5 +1,5 @@
 import { Dimensions, AppState } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Logo } from "@/assets/images";
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,19 +11,28 @@ const { width } = Dimensions.get('window');
 
 const Index = () => {
     const router = useRouter();
-    const [User, setUser] = useState(null);
+    const [User, setUser] = useState(4); // Replace with actual user state retrieval logic
     const [appState, setAppState] = useState(AppState.currentState);
 
+    const checkUserAndRedirect = () => {
+        setTimeout(() => {
+            if (User !== null) {
+            console.log("User exists, redirecting to homepage");
+            router.replace('/(main)');
+            } else {
+            console.log("No user found, redirecting to onboarding");
+            router.replace('/(onBoarding)');
+            }
+        }, 2500);
+    };
+
     useEffect(() => {
+        // Check user when the component mounts
+        checkUserAndRedirect();
+
         const appStateListener = AppState.addEventListener('change', (nextAppState) => {
             if (appState.match(/inactive|background/) && nextAppState === 'active') {
-                // App has come to the foreground, check user state
-                if (User) {
-                    console.log("User exists, redirect to homepage");
-                    router.replace('home'); // Uncomment and replace with actual homepage navigation
-                } else {
-                    router.replace('onBoarding');
-                }
+                checkUserAndRedirect();
             }
             setAppState(nextAppState);
         });
@@ -31,20 +40,7 @@ const Index = () => {
         return () => {
             appStateListener.remove(); // Cleanup the listener on component unmount
         };
-    }, [User, appState, router]);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (User) {
-                console.log("To be redirected to homepage");
-                // router.replace('/HomePage'); // Uncomment and replace with actual homepage navigation
-            } else {
-                router.replace('/(onBoarding)');
-            }
-        }, 3000); // 3 seconds delay
-
-        return () => clearTimeout(timer); // Cleanup the timer
-    }, [router, User]);
+    }, [User, appState]);
 
     return (
         <SafeAreaView style={styles.container}>

@@ -25,6 +25,4 @@ const FactureCard = ({Icon, Title, Content} : FactureCardProps) => {
     );
 }
 
-const styles = StyleSheet.create({})
-
 export default FactureCard;

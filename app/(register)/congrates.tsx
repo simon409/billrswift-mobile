@@ -11,7 +11,7 @@ const Congrates = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-                router.replace('(home)');
+                router.replace('(main)');
         }, 1600); // 3 seconds delay
 
         return () => clearTimeout(timer); // Cleanup the timer

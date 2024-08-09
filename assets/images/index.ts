@@ -8,6 +8,7 @@ import Scanner from './scanner.svg';
 import Receipt from './receipt.svg';
 import Payment from './payment.svg';
 import Achat from './achat.svg';
+import Settings from './settings.svg';
 
 export {
     Logo,
@@ -19,5 +20,6 @@ export {
     Scanner,
     Receipt,
     Payment,
-    Achat
+    Achat,
+    Settings
 }

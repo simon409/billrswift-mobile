@@ -9,6 +9,9 @@ import { styles } from '../styles/style';
 import ActionRapides from '../Components/ActionRapides';
 import FactureSection from '../Components/Facture';
 import { ScrollView } from 'react-native-gesture-handler';
+import JournalAudit from '../assets/JournalAudit.svg';
+import SwipeableComponent from '../Components/SwipeableComponent';
+import FacturesComponent from '../Components/FacturesComponent';
 
 const Home = () => {
     return (
@@ -36,6 +39,18 @@ const Home = () => {
                 <View style={styles.contentContainer}>
                     <ActionRapides />
                     <FactureSection />
+                    <View style={styles.cardContainer}>
+                        <TouchableOpacity style={styles.cardButton}>
+                            <View style={styles.IconContainer}>
+                                <JournalAudit width={30} height={30} />
+                            </View>
+                            <View>
+                                <Text style={styles.cardTitle}>Voir mon journal d'audit</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <SwipeableComponent />
+                    <FacturesComponent />
                 </View>
             </ScrollView>
         </SafeAreaView>
